@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import FormLogin from "../components/FormLogin";
 import group from "../images/group.png";
-import Layout from "../components/Layout";
 
 const Login: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
@@ -20,7 +19,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <div className="2xl:container grid grid-cols-2 place-items-center">
       <div className="bg-alta-blue p-16">
         <img className="p-16" src={group} alt="" />
       </div>
@@ -40,11 +39,7 @@ const Login: React.FC = () => {
             <div>
               <form onSubmit={handleSubmit}>
                 <FormLogin id="name" label="Your Name..." type="text" />
-                <FormLogin
-                  id="password"
-                  label="Your Password..."
-                  type="password"
-                />
+                <FormLogin id="password" label="Your Password..." type="password"/>
                 <Button id="login" label="login" onClick={handleButtonClick} />
               </form>
             </div>
@@ -53,7 +48,7 @@ const Login: React.FC = () => {
           )}
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
