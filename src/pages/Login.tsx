@@ -24,7 +24,7 @@ const Login: React.FC = () => {
       <div className="bg-alta-blue p-16">
         <img className="p-16" src={group} alt="" />
       </div>
-      <div className="p-12">
+      <div className="p-12 text-center">
         <p className="pb-12 text-left">
           Alterra Academy adalah wadah transformasi digital untuk semua orang
           Indonesia untuk menjadi Talenta Digital dengan kualitas terbaik di
