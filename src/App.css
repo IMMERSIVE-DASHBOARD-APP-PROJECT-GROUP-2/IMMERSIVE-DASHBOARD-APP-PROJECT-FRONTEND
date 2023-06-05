@@ -1,9 +1,13 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 1440px;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
+
+/* button {
+  background-color: #163050;
+} */
 
 .logo {
   height: 6em;

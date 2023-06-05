@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({ id, label }) => {
   return (
-    <button id={id} className="btn bg-indigo-950">
+    <button id={id} className="btn bg-indigo-950 shadow-lg w-1/2 rounded-3xl">
       {label}
     </button>
   );
