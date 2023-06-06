@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import GeneralSearch from "../components/GeneralSearch";
+import Pagination from "../components/Pagination";
 import pencil from "../icons/pencil.png"
 import bin from "../icons/bin.png"
 
@@ -36,6 +37,7 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </Navbar>
   );
 };
