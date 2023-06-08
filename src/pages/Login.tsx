@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
 import Swal from "sweetalert2";
 
 import Button from "../components/Button";
@@ -20,6 +21,9 @@ const Login: React.FC = () => {
   const handleButtonClick = () => {
     setShowForm(true);
   };
+
+  // cookies object
+  const cookies = new Cookies();
 
   const formik = useFormik({
     initialValues: {
@@ -42,6 +46,7 @@ const Login: React.FC = () => {
       try {
         const response = await api.Login(user.email, user.password);
         console.log(response);
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -49,6 +54,10 @@ const Login: React.FC = () => {
           showConfirmButton: false,
           timer: 1000,
         });
+
+        // simpan token ke cookies
+        cookies.set("token", response.data.token, { path: "/" });
+
         navigate("/userlist");
       } catch (error) {
         console.error(error);
