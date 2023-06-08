@@ -1,6 +1,6 @@
 import React, { FC } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../images/logo-ALTA-white.png";
-import { Link } from "react-router-dom";
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -8,6 +8,12 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ children, listname }) => {
+  const location = useLocation();
+
+  const isActiveRoute = (route: string): boolean => {
+    return location.pathname === route;
+  };
+
   return (
     <div className="2xl-container w-screen h-screen grid grid-rows-5 grid-cols-4">
       <div className="row-span-5 bg-alta-blue shadow-3xl text-white">
@@ -17,31 +23,45 @@ const Navbar: FC<NavbarProps> = ({ children, listname }) => {
         <ul className="menu menu-vertical px-5">
           <div className="border-b-2 border-white mb-3" />
           <li className="rounded-none cursor-pointer hover:bg-alta-orange items-left">
-            <Link to={"#"} className="rounded-none text-white text-base">
+            <NavLink
+              to={"/dashboard"}
+              className={`rounded-none text-white text-base ${
+                isActiveRoute("/dashboard") ? "text-alta-orange" : ""
+              }`}
+            >
               Dashboard
-            </Link>
+            </NavLink>
           </li>
           <li className="rounded-none cursor-pointer hover:bg-alta-orange items-left">
-            <Link to={"#"} className="rounded-none text-white text-base">
+            <NavLink
+              to={"/mentee"}
+              className={`rounded-none text-white text-base ${
+                isActiveRoute("/mentee") ? "text-alta-orange" : ""
+              }`}
+            >
               Mentee
-            </Link>
+            </NavLink>
           </li>
           <div className="border-b-2 border-white pt-3" />
           <li className="rounded-none cursor-pointer hover:bg-alta-orange items-left mt-3">
-            <Link
+            <NavLink
               to={"/userlist"}
-              className="rounded-none text-white text-base"
+              className={`rounded-none text-white text-base ${
+                isActiveRoute("/userlist") ? "bg-alta-orange" : ""
+              }`}
             >
               User
-            </Link>
+            </NavLink>
           </li>
           <li className="rounded-none cursor-pointer hover:bg-alta-orange items-left">
-            <Link
+            <NavLink
               to={"/classlist"}
-              className="rounded-none text-white text-base"
+              className={`rounded-none text-white text-base ${
+                isActiveRoute("/classlist") ? "bg-alta-orange" : ""
+              }`}
             >
               Class
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
