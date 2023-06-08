@@ -1,10 +1,16 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'https://virtserver.swaggerhub.com/AGUSSUGIONO1224_1/project/1.0.0',
+  baseURL: "http://34.123.236.1",
+  // Albah@gmail.com
+  // Albah51220
 });
 
-interface LoginResponse {}
+interface LoginResponse {
+  data: {
+    token: string;
+  };
+}
 
 export default {
   Login: (email: string, password: string): Promise<LoginResponse> =>
