@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import Button from "../components/Button";
 import group from "../images/group.png";
-import api from "../axios/API";
+import api from "../api/API";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
