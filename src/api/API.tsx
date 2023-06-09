@@ -2,8 +2,6 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://34.123.236.1",
-  // Albah@gmail.com
-  // Albah51220
 });
 
 interface LoginResponse {
