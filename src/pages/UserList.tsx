@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 import Navbar from "../components/Navbar";
 import GeneralSearch from "../components/GeneralSearch";
 import Pagination from "../components/Pagination";
@@ -7,46 +8,48 @@ import pencil from "../icons/pencil.png";
 import bin from "../icons/bin.png";
 
 interface User {
-  name: string;
+  no: number;
+  user_id: string;
+  fullname: string;
   email: string;
   team: string;
   role: string;
   status: string;
+  created_at: string;
+  updated_at: string;
 }
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const cookies = new Cookies();
+  const token = cookies.get("token");
 
   useEffect(() => {
-    fetchUserList();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<User[]>("http://34.123.236.1/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const fetchUserList = async (): Promise<void> => {
-    try {
-      const token = "your-auth-token"; // Ganti dengan token autentikasi Anda
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-
-      const response = await axios.get<User[]>("http://34.123.236.1/users", {
-        headers,
-      });
-      setUsers(response.data);
-    } catch (error) {
-      console.error("Error fetching user list:", error);
-    }
-  };
+    fetchData();
+  }, [token]);
 
   return (
     <Navbar listname="User List">
       <GeneralSearch />
       <div className="overflow-x-auto mt-6">
         <table className="table border-2">
-          {/* head */}
           <thead className="text-black">
             <tr>
               <th>No.</th>
-              <th>Name</th>
+              <th>Full Name</th>
               <th>Email</th>
               <th>Team</th>
               <th>Role</th>
@@ -56,10 +59,10 @@ const UserList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <th>{index + 1}</th>
-                <td>{user.name}</td>
+            {users.map((user) => (
+              <tr key={user.no}>
+                <th>{user.no}</th>
+                <td>{user.fullname}</td>
                 <td>{user.email}</td>
                 <td>{user.team}</td>
                 <td>{user.role}</td>

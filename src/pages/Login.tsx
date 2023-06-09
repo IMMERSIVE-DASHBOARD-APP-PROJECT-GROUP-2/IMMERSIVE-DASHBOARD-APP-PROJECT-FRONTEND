@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import Swal from "sweetalert2";
-
 import Button from "../components/Button";
 import group from "../images/group.png";
 import api from "../api/API";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -18,11 +16,6 @@ const schema = Yup.object({
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const handleButtonClick = () => {
-    setShowForm(true);
-  };
-
-  // cookies object
   const cookies = new Cookies();
 
   const formik = useFormik({
@@ -35,6 +28,10 @@ const Login: React.FC = () => {
       console.log(values);
     },
   });
+
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
 
   const handleLogin = async () => {
     const user = {
@@ -55,7 +52,7 @@ const Login: React.FC = () => {
           timer: 1000,
         });
 
-        // simpan token ke cookies
+        // Simpan token ke cookies
         cookies.set("token", response.data.token, { path: "/" });
 
         navigate("/userlist");
